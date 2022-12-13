@@ -3,6 +3,11 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require("body-parser");
 
+
+const multer  = require('multer')
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
@@ -22,9 +27,19 @@ app.listen(8000, () => {
 
   
 const Form = require('./server/models/form')
-app.post('/register', async(req,res) => {
+const Photo = require('./server/models/form')
+app.post('/register', upload.single("image"), async(req,res) => {
     const details = new Form(req.body)
     try{
+        let imageUploadObject = {
+            image: {
+              data: req.file.buffer,
+              contentType: req.file.mimetype
+            },
+          };
+        const uploadObject = new Photo(imageUploadObject);
+          // saving the object into the database
+        const uploadProcess = await uploadObject.save();
         await details.save()
         res.status(201).json({
             status: 'Success',

@@ -24,10 +24,19 @@ let formSchema = new mongoose.Schema({
   phone : {
     type : Number,
     required : true
-  }
+  },
+  
   
 });
 
-const Form = mongoose.model('Form', formSchema);
+let photoSchema = new mongoose.Schema({
+  image : {
+    data: Buffer,
+    contentType: String,
+  }
+})
 
-module.exports = Form
+const Form = mongoose.model('Form', formSchema);
+const Photo = mongoose.model("Photo",photoSchema)
+
+module.exports = Form,Photo
