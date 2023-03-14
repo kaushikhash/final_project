@@ -3,6 +3,7 @@ import logo from '../Assets/logo.jpg'
 import useStore from '../Store/Store'
 const Navbar = () => {
   const textWhite = useStore(state => state.textWhite)
+  console.log(textWhite)
   return (
     <nav className='navbar bg-transperent flex items-center p-6 justify-between absolute w-full text-white font-medium text-lg'>
       <Link to='/'>
@@ -18,15 +19,16 @@ const Navbar = () => {
           </h3>
         </Link>
         <Link to='/register'>
-          <h3
-            className='px-2 ml-4'
-            onClick={useStore.setState({ textWhite: '#000000' })}
-          >
-            Register
-          </h3>
+          <h3 className='px-2 ml-4'>Register</h3>
         </Link>
         <Link to='/scan'>
           <h3 className='px-2 ml-4'>Scan</h3>
+        </Link>
+        <Link to='/qr'>
+        <h3 className='px-2 ml-4'>QR</h3>        
+        </Link>
+        <Link to='/events'>
+        <h3 className='px-2 ml-4'>Events</h3>        
         </Link>
       </div>
     </nav>

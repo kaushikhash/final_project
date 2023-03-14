@@ -13,30 +13,22 @@ const { mongoose } = require(path.join(__dirname, '/../db/db'));
 
 let formSchema = new mongoose.Schema({
   name: {
-      type: String,
-      required: true,
+    type: String,
+    required: true,
   },
   email: {
-      type: String,
-      required: true,
-      
+    type: String,
+    required: true,
+
   },
-  phone : {
-    type : Number,
-    required : true
+  phone: {
+    type: Number,
+    required: true
   },
-  
-  
 });
 
-let photoSchema = new mongoose.Schema({
-  image : {
-    data: Buffer,
-    contentType: String,
-  }
-})
 
 const Form = mongoose.model('Form', formSchema);
-const Photo = mongoose.model("Photo",photoSchema)
 
-module.exports = Form,Photo
+
+module.exports = Form

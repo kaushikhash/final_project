@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const url = "mongodb://localhost:27017/my_db"
+const url = "mongodb://localhost:27017/GetMeThrough"
 
 mongoose.connect(url).then((ans) => {
     console.log("ConnectedSuccessful")

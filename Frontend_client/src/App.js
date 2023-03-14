@@ -5,6 +5,9 @@ import Home from './Components/Home';
 import Navbar from './Components/Navbar';
 import Register from './Components/Register';
 import Scan from './Components/Scan';
+import QRgenerator from './Components/QRgenerator';
+import Camera from './Components/Camera';
+import Events from './Components/Events'
 function App() {
   return (
     <Router>
@@ -14,6 +17,9 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/scan" element={<Scan/>}/>
+          <Route path="/qr" element={<QRgenerator/>}/>
+          <Route path="/camera" element={<Camera/>}/>
+          <Route path="/events" element={<Events/>}/>
         </Routes>
       </div>
     </Router>
