@@ -7,19 +7,21 @@ import Register from './Components/Register';
 import Scan from './Components/Scan';
 import QRgenerator from './Components/QRgenerator';
 import Camera from './Components/Camera';
-import Events from './Components/Events'
+import Events from './Components/Events';
+import QRscanner from './Components/QRscanner';
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar/>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/scan" element={<Scan/>}/>
-          <Route path="/qr" element={<QRgenerator/>}/>
-          <Route path="/camera" element={<Camera/>}/>
-          <Route path="/events" element={<Events/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/scan" element={<Scan />} />
+          <Route path="/qr" element={<QRgenerator />} />
+          <Route path="/camera" element={<Camera />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/scanner" element={<QRscanner />} />
         </Routes>
       </div>
     </Router>

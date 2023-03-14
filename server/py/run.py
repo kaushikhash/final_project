@@ -26,7 +26,13 @@ def get_name():
     return jsonify({"Result": name_of})
 
 
-video_capture = cv2.VideoCapture(0)
+@app.route('/exit')
+def exit():
+    if video_capture.isOpened():
+        video_capture.release()
+        print("Exited")
+        return ("Done")
+
 
 known_encodings_file_path = r"D:\final_project\data\known_encodings_file.csv"
 people_file_path = r"D:\final_project\data\people_file.csv"
@@ -45,15 +51,20 @@ else:
 
 
 def gen_frames():
+    global video_capture
+    video_capture = cv2.VideoCapture(0)
     face_locations = []
     face_encodings = []
     face_names = []
     process_this_frame = True
     global name_of
+
     count = 0
     while True:
         # Grab a single frame of video
-        _, frame = video_capture.read()
+        ret, frame = video_capture.read()
+        if not ret:
+            break
 
         if process_this_frame:
             # Resize frame of video to 1/4 size for faster face recognition processing
@@ -132,10 +143,9 @@ def gen_frames():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-        """video_capture.release()
-        cv2.destroyAllWindows()
-        print("Handled and destroyed")"""
+    video_capture.release()
+# print("Handled and destroyed")
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

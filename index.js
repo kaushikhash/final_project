@@ -15,7 +15,7 @@ app.get('/message', (req, res) => {
     res.json({ message: "Hello there!!!" });
 });
 
-app.listen(8000, () => {
+app.listen(8000, "0.0.0.0", () => {
     console.log(`Server is running on port 8000.`);
 });
 
@@ -133,9 +133,10 @@ app.post("/update", async (req, res) => {
     // console.log(event_idd, peoplee)
     let doc = await Event.findOne({ event_id: req.body[1] });
     // console.log(doc)
-    console.log(req.body[0].Result)
+    console.log(req.body)
+    console.log(req.body[0])
     console.log(req.body[1])
-    doc.people.push(req.body[0].Result)
+    doc.people.push(req.body[0])
     doc.save();
     res.json("Updated")
     // console.log(doc)
