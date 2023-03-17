@@ -9,19 +9,21 @@ import QRgenerator from './Components/QRgenerator';
 import Camera from './Components/Camera';
 import Events from './Components/Events';
 import QRscanner from './Components/QRscanner';
+import Landing from './Components/Landing';
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/scan" element={<Scan />} />
+          {/* <Route path="/scan" element={<Scan />} /> */}
           <Route path="/qr" element={<QRgenerator />} />
           <Route path="/camera" element={<Camera />} />
           <Route path="/events" element={<Events />} />
           <Route path="/scanner" element={<QRscanner />} />
+          <Route path="/landing" element={<Landing />} />
         </Routes>
       </div>
     </Router>
