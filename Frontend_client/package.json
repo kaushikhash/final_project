@@ -13,6 +13,7 @@
     "qrcode.react": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-loader-spinner": "^5.3.4",
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",

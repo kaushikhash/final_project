@@ -1,10 +1,11 @@
 import useStore from '../Store/Store'
-import profile from '../Assets/profile.jpg'
+// import profile from '../Assets/profile.jpg'
 import React from "react"
 import Axios from 'axios'
 import QRgenerator from './QRgenerator';
 import useImage from '../Store/Images';
-
+import { useState } from 'react';
+import { InfinitySpin } from 'react-loader-spinner';
 // import { useNavigate } from "react-router-dom";
 let sleep = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -12,6 +13,7 @@ let sleep = ms => {
 
 const Success = () => {
   // const success = useStore(state => state.success)
+  const [isLoading, setLoading] = useState(true);
   const getImage = useImage(state => state.images);
   console.log(getImage.images)
   const success = useStore(state => state.success)
@@ -21,9 +23,22 @@ const Success = () => {
 
       Axios.get('http://localhost:8000/get-register').then((response) => {
         setPost(response.data.data.Formdetails);
+        if (setPost) {
+          setLoading(!isLoading);
+        };
       });
     });
   }, []);
+  if (isLoading) {
+    return (
+      <div className='Overlay-success h-[80vh] w-[80vw] absolute top-[50%] left-[50%] bg-white z-[1002] border bg-gradient-to-r from-black to-slate-200'>
+        <InfinitySpin
+          width='200'
+          color="#4fa94d"
+        />
+      </div>
+    )
+  }
   return (
     <div className='Overlay-success h-[80vh] w-[80vw] absolute top-[50%] left-[50%] bg-white z-[1002] border bg-gradient-to-r from-black to-slate-200'>
 
