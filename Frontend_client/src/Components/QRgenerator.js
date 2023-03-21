@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 // import {Fab, TextField, TextareaAutosize, Grid} from '@material-ui/core'
 // import {ArrowBack, GetApp} from '@material-ui/icons'
 import { Link } from "react-router-dom";
+import useName from '../Store/Name'
 import QRcode from 'qrcode.react'
 import useStore from '../Store/Store'
 
 function QRgenerator() {
     useStore.setState({ textWhite: '#000000' })
-    const [qr, setQr] = useState('lintangwisesa');
+    const getName = useName(state => state.names);
+    const [qr, setQr] = useState('http://GetMeThrough/' + getName.names);
     const handleChange = (event) => {
         setQr(event.target.value);
     };
@@ -25,7 +27,7 @@ function QRgenerator() {
     // };
 
     return (
-      <div className='QR-generator flex justify-center items-center flex-col mt-4 p-4 w-fit-content'>
+        <div className='QR-generator flex justify-center items-center flex-col mt-4 p-4 w-fit-content'>
             <div className='Register-left-desc w-[50vw] flex flex-col items-center justify-center'>
                 <h1 className='font-black text-7xl mt-16'>QR CODE</h1>
             </div>
@@ -33,19 +35,19 @@ function QRgenerator() {
             <div>
                 {
                     qr ?
-                    <QRcode 
-                        id="myqr"
-                        value={qr}
-                        size={320}
-                        includeMargin={true}
-                    /> :
-                    <p>No QR code preview</p>
+                        <QRcode
+                            id="myqr"
+                            value={qr}
+                            size={320}
+                            includeMargin={true}
+                        /> :
+                        <p>No QR code preview</p>
                 }
             </div>
             <div className="Qr-box mt-4">
-                <input onChange={handleChange} style={{width:320}}
-                value={qr} label="QR content" size="large" variant="outlined" color="primary" 
-                className='border border-2
+                <input onChange={handleChange} style={{ width: 320 }}
+                    value={qr} label="QR content" size="large" variant="outlined" color="primary"
+                    className='border
                 '
                 />
             </div>
@@ -70,9 +72,8 @@ function QRgenerator() {
                     ''
                 } */}
             </div>
-      </div>
+        </div>
     );
-  }
-  
-  export default QRgenerator;
-  
+}
+
+export default QRgenerator;

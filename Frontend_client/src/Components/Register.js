@@ -5,6 +5,7 @@ import Success from './Overlay-success'
 import useStore from '../Store/Store'
 import validator from "validator";
 import Axios from 'axios';
+import useName from '../Store/Name'
 const Register = () => {
   const [message, setMessage] = useState("");
   const validateEmail = (e) => {
@@ -21,6 +22,7 @@ const Register = () => {
   const [email, setEmail] = useState(null)
   const [phone, setPhone] = useState(null)
   const [img, setImage] = useState(null)
+  const addNames = useName(state => state.addNames);
   const success = useStore(state => state.success)
   setTimeout(() => {
     const imgDiv = document.querySelector('.profile-pic-div')
@@ -59,15 +61,19 @@ const Register = () => {
   let sleep = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
+  const addName = () => {
+    addNames({ names: name });
+  };
 
   async function handleSubmit() {
     useStore.setState({ success: true })
     await Axios.post('http://localhost:8000/register', formdata)
     handleModel();
+
   }
 
   async function handleModel() {
-    sleep(3000).then(() => {
+    sleep(2000).then(() => {
       Axios.get('http://localhost:8000/train')
     });
   }
@@ -104,6 +110,7 @@ const Register = () => {
                 className='border-2 border-black  px-2 py-1 w-[fit-content] rounded  cursor-pointer'
                 onChange={e => {
                   setName(e.target.value)
+
                 }}
               />
             </div>
@@ -140,8 +147,8 @@ const Register = () => {
           <div className='Form-buttons mt-8 flex justify-end'>
             <button
               type='submit'
-              className=' border-2 border-black border border-2 px-4 py-2 mt-2'
-              onClick={() => handleSubmit()}
+              className=' border-2 border-black px-4 py-2 mt-2'
+              onClick={() => { handleSubmit(); addName(); }}
             >
               Submit
             </button>

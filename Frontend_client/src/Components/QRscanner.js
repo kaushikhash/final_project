@@ -12,7 +12,9 @@ function QRscanner() {
     const [qrscan, setQrscan] = useState('No result');
     const handleScan = data => {
         if (data) {
-            setQrscan(data)
+            // console.log(typeof (data))
+            // console.log())
+            setQrscan(data.slice(20))
         }
     }
     const handleError = err => {

@@ -61,6 +61,7 @@ def gen_frames():
 
     count = 0
     while True:
+
         # Grab a single frame of video
         ret, frame = video_capture.read()
         if not ret:

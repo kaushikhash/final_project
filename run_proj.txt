@@ -1,0 +1,30 @@
+How to run the project after installing the necessary dependencies
+------------------------------------------------------------------
+Step1: type ( nodemon start ) in the root directory
+
+ex: ...\final_project > nodemon start
+
+Step2: Open a new terminal using the command ctrl+Shift+` 
+
+Step3: Go to Frontend_client directory and type npm start
+
+ex:  cd Frontend_client
+     npm start
+
+Step4: Go to Scripts directory under flask_venv\flaskk and activate the virtual 
+environment
+
+ex: cd flask_venv\flaskk\Scripts
+    then type   ./activate
+
+Step5: Open a new terminal using the command ctrl+Shift+` 
+
+Step6: Go to server\py directory and run the run.py file
+
+ex: cd sevrver\py
+
+and then type ( python run.py )
+
+	
+
+	
