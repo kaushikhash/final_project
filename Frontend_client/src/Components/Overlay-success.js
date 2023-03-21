@@ -1,8 +1,10 @@
 import useStore from '../Store/Store'
-// import profile from '../Assets/profile.jpg'
+import profile from '../Assets/profile.jpg'
 import React from "react"
 import Axios from 'axios'
 import QRgenerator from './QRgenerator';
+import useImage from '../Store/Images';
+
 // import { useNavigate } from "react-router-dom";
 let sleep = ms => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -10,7 +12,8 @@ let sleep = ms => {
 
 const Success = () => {
   // const success = useStore(state => state.success)
-
+  const getImage = useImage(state => state.images);
+  console.log(getImage.images)
   const success = useStore(state => state.success)
   const [post, setPost] = React.useState([]);
   React.useEffect(() => {
@@ -31,7 +34,7 @@ const Success = () => {
             // const base64String = btoa(new Uint8Array(dataa).reduce(function(data,byte){
             //   return dataa + String.fromCharCode(byte);
             // }))
-            console.log(val.name)
+            // console.log(val.name)
             return <div key={key} >
               <h1>{val.name}</h1>
               <h1>{val.email}</h1>
@@ -46,6 +49,8 @@ const Success = () => {
           })
         }
       </div>
+
+
       <div className='OS-right'>
         <button
           type='submit'
@@ -57,6 +62,7 @@ const Success = () => {
         >
           Honse
         </button>
+        <img src={getImage.images} alt="profile" width={240} height={240} />
         <QRgenerator></QRgenerator>
       </div>
 

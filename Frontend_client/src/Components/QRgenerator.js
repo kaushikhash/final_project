@@ -44,7 +44,7 @@ function QRgenerator() {
                         <p>No QR code preview</p>
                 }
             </div>
-            <div className="Qr-box mt-4">
+            <div className="Qr-box mt-4" >
                 <input onChange={handleChange} style={{ width: 320 }}
                     value={qr} label="QR content" size="large" variant="outlined" color="primary"
                     className='border

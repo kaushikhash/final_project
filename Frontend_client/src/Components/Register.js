@@ -6,6 +6,8 @@ import useStore from '../Store/Store'
 import validator from "validator";
 import Axios from 'axios';
 import useName from '../Store/Name'
+import useImage from '../Store/Images';
+
 const Register = () => {
   const [message, setMessage] = useState("");
   const validateEmail = (e) => {
@@ -23,6 +25,7 @@ const Register = () => {
   const [phone, setPhone] = useState(null)
   const [img, setImage] = useState(null)
   const addNames = useName(state => state.addNames);
+  const addImages = useImage(state => state.addImages);
   const success = useStore(state => state.success)
   setTimeout(() => {
     const imgDiv = document.querySelector('.profile-pic-div')
@@ -64,6 +67,9 @@ const Register = () => {
   const addName = () => {
     addNames({ names: name });
   };
+  const addImage = () => {
+    addImages({ images: URL.createObjectURL(img) });
+  };
 
   async function handleSubmit() {
     useStore.setState({ success: true })
@@ -87,7 +93,7 @@ const Register = () => {
         <h1 className='font-black text-9xl'>REGISTER</h1>
       </div>
       <div className='Register-right w-[50vw] flex flex-col items-center justify-center'>
-        <div className='profile-pic-div h-[200px] w-[200px] mb-8 relative overflow-hidden border border-2 border-black rounded-full'>
+        <div className='profile-pic-div h-[200px] w-[200px] mb-8 relative overflow-hidden border border-black rounded-full'>
           <img src={profile} id='photo' />
           <input type='file' id='file' className='hidden' name="testImage"
             onChange={e => {
@@ -99,6 +105,7 @@ const Register = () => {
             Choose Photo
           </label>
         </div>
+
 
         <div className='Form-container flex-col flex'>
           <div className='Form flex-col justify-center items-center flex'>
@@ -148,7 +155,7 @@ const Register = () => {
             <button
               type='submit'
               className=' border-2 border-black px-4 py-2 mt-2'
-              onClick={() => { handleSubmit(); addName(); }}
+              onClick={() => { handleSubmit(); addName(); addImage(); }}
             >
               Submit
             </button>
