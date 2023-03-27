@@ -2,6 +2,7 @@ import useStore from '../Store/Store'
 // import profile from '../Assets/profile.jpg'
 import React from "react"
 // import Axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import QRgenerator from './QRgenerator';
 import useImage from '../Store/Images';
 import { useState } from 'react';
@@ -15,12 +16,16 @@ let sleep = ms => {
 
 const Success = () => {
   // const success = useStore(state => state.success)
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const getImage = useImage(state => state.images);
   const getName = useName(state => state.names);
   const getEmail = useEmail(state => state.emails);
   const getPhone = usePhone(state => state.phones);
   console.log(getName, getEmail, getPhone)
+  const navigateHome = () => {
+    navigate('/')
+  }
   // const success = useStore(state => state.success)
   // const [post, setPost] = React.useState([]);
   // React.useEffect(() => {
@@ -89,10 +94,12 @@ const Success = () => {
 
       <div className='OS-right'>
         <button
-          type='submit'
+          // type='submit'
           className=' border-2 border-black px-4 py-2 mt-2'
           onClick={() => {
             useStore.setState({ success: false });
+            navigateHome();
+
           }}
 
         >

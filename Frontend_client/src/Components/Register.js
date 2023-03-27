@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import profile from '../Assets/profile.jpg'
 import Success from './Overlay-success'
@@ -31,7 +31,7 @@ const Register = () => {
   const addEmails = useEmail(state => state.addEmails);
   const addPhones = usePhone(state => state.addPhones);
   const success = useStore(state => state.success)
-  useEffect(() => {
+  useRef(() => {
     const imgDiv = document.querySelector('.profile-pic-div')
     const imgg = document.querySelector('#photo')
     const file = document.querySelector('#file')
