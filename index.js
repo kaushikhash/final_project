@@ -76,24 +76,24 @@ app.post('/register', upload.single('testImage'), async (req, res) => {
 
 });
 
-app.get('/get-register', async (req, res) => {
-    const Formdetails = await Form.find({}).sort({ _id: -1 }).limit(1);
+// app.get('/get-register', async (req, res) => {
+//     const Formdetails = await Form.find({}).sort({ _id: -1 }).limit(1);
 
-    try {
-        res.status(200).json({
-            status: 'Success',
-            data: {
-                Formdetails
-            }
-        })
-    } catch (err) {
-        res.status(500).json({
-            status: 'Failed',
-            message: err
-        })
-    }
+//     try {
+//         res.status(200).json({
+//             status: 'Success',
+//             data: {
+//                 Formdetails
+//             }
+//         })
+//     } catch (err) {
+//         res.status(500).json({
+//             status: 'Failed',
+//             message: err
+//         })
+//     }
 
-})
+// })
 
 app.get('/train', (req, res) => {
     // var data1;

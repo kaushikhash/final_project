@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import profile from '../Assets/profile.jpg'
 import Success from './Overlay-success'
@@ -6,30 +6,34 @@ import useStore from '../Store/Store'
 import validator from "validator";
 import Axios from 'axios';
 import useName from '../Store/Name'
+import { useEmail, usePhone } from '../Store/Details';
 import useImage from '../Store/Images';
 
 const Register = () => {
-  const [message, setMessage] = useState("");
-  const validateEmail = (e) => {
-    var email = e.target.value;
+  // const [message, setMessage] = useState("");
+  // const validateEmail = (e) => {
+  //   var email = e.target.value;
 
-    if (validator.isEmail(email)) {
-      setMessage("Thank you");
-      setEmail(e.target.value)
-    } else {
-      setMessage("Please, enter valid Email!");
-    }
-  };
+  //   if (validator.isEmail(email)) {
+  //     setMessage("Thank you");
+  //     setEmail(e.target.value)
+  //   } else {
+  //     setMessage("Please, enter valid Email!");
+  //   }
+  // };
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
   const [phone, setPhone] = useState(null)
   const [img, setImage] = useState(null)
+  const [load, setLoad] = useState(false)
   const addNames = useName(state => state.addNames);
   const addImages = useImage(state => state.addImages);
+  const addEmails = useEmail(state => state.addEmails);
+  const addPhones = usePhone(state => state.addPhones);
   const success = useStore(state => state.success)
-  setTimeout(() => {
+  useEffect(() => {
     const imgDiv = document.querySelector('.profile-pic-div')
-    const img = document.querySelector('#photo')
+    const imgg = document.querySelector('#photo')
     const file = document.querySelector('#file')
     const uploadBtn = document.querySelector('#uploadBtn')
 
@@ -48,13 +52,13 @@ const Register = () => {
         const reader = new FileReader()
 
         reader.addEventListener('load', function () {
-          img.setAttribute('src', reader.result)
+          imgg.setAttribute('src', reader.result)
         })
 
         reader.readAsDataURL(choosedFile)
       }
     })
-  })
+  }, [])
 
   const formdata = new FormData();
   formdata.append("name", name)
@@ -70,25 +74,38 @@ const Register = () => {
   const addImage = () => {
     addImages({ images: URL.createObjectURL(img) });
   };
-
-  async function handleSubmit() {
+  const addEmail = () => {
+    addEmails({ emails: email })
+  }
+  const addPhone = () => {
+    addPhones({ phones: phone })
+  }
+  function handleSubmit() {
+    addName(); addImage(); addEmail(); addPhone();
     useStore.setState({ success: true })
-    await Axios.post('http://localhost:8000/register', formdata)
+
+    Axios.post('http://localhost:8000/register', formdata)
     handleModel();
+    setLoad(true)
 
   }
 
   async function handleModel() {
-    sleep(2000).then(() => {
+    sleep(1000).then(() => {
       Axios.get('http://localhost:8000/train')
     });
   }
-
+  if (load) {
+    return (
+      <Success />
+    )
+  }
 
   return (
     // <form encType='multipart/form-data'>
     <div className='Register justify-center h-[100vh] flex'>
-      {success && name && email && phone && <Success />}
+      {/* {success && name && email && phone && <Success />} */}
+
       <div className='Register-left-desc w-[50vw] flex flex-col items-center justify-center'>
         <h1 className='font-black text-9xl'>REGISTER</h1>
       </div>
@@ -126,7 +143,7 @@ const Register = () => {
               <input
                 type='text'
                 className='border-2 border-black  px-2 py-1 w-[fit-content] rounded  cursor-pointer'
-                onChange={(e) => validateEmail(e)}
+                onChange={(e) => { setEmail(e.target.value) }}
 
               // { setEmail(e.target.value)
               // }
@@ -155,7 +172,7 @@ const Register = () => {
             <button
               type='submit'
               className=' border-2 border-black px-4 py-2 mt-2'
-              onClick={() => { handleSubmit(); addName(); addImage(); }}
+              onClick={() => { handleSubmit(); }}
             >
               Submit
             </button>
