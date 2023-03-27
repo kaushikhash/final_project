@@ -127,9 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-<<<<<<< HEAD
 /known_people
 /node_modules
 /data
-=======
->>>>>>> 9649ede3fac495fc158461baa7ec67ddbe286507
