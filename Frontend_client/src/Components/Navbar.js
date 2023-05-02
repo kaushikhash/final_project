@@ -3,7 +3,7 @@ import logo from '../Assets/logo.jpg'
 import useStore from '../Store/Store'
 const Navbar = () => {
   const textWhite = useStore(state => state.textWhite)
-  console.log(textWhite)
+  // console.log(textWhite)
   return (
     <nav className='navbar bg-transperent flex items-center p-6 justify-center absolute w-full text-white font-medium text-lg'>
       <Link to='/'>
