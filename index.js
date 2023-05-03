@@ -76,24 +76,58 @@ app.post('/register', upload.single('testImage'), async (req, res) => {
 
 });
 
-// app.get('/get-register', async (req, res) => {
-//     const Formdetails = await Form.find({}).sort({ _id: -1 }).limit(1);
+app.get('/get-register', async (req, res) => {
+    const Formdetails = await Form.find({}).sort({ _id: -1 }).limit(1);
 
-//     try {
-//         res.status(200).json({
-//             status: 'Success',
-//             data: {
-//                 Formdetails
-//             }
-//         })
-//     } catch (err) {
-//         res.status(500).json({
-//             status: 'Failed',
-//             message: err
-//         })
-//     }
+    try {
+        res.status(200).json({
+            status: 'Success',
+            data: {
+                Formdetails
+            }
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: 'Failed',
+            message: err
+        })
+    }
 
-// })
+})
+app.post('/prod_event_edit', (req, res) => {
+    console.log(req.body.event_id)
+    // var myquery = { "event_id": req.body.event_id };
+    // var newvalues = { $set: { name_of_event: "Event one updatedd", description: "Event one updatedd" } };
+    const event_update = Event.updateOne({ "event_id": req.body.event_id }, { $set: { name_of_event: req.body.name_of_event, description: req.body.description } }, function (err, res) {
+        if (err) throw err;
+        console.log("1 document updated");
+        res.status(201).send('Document updated succesfully')
+    })
+    // event_update.save()
+    //     .then((res) => {
+    //         console.log("Detials updated");
+    //     })
+    //     .catch((err) => {
+    //         console.log(err, 'error has occured');
+    //     });
+
+})
+app.post('/prod_event', async (req, res) => {
+    var queryy = { "event_id": req.body.event_id }
+    const eventDetails = await Event.findOne(queryy)
+    // .sort({ _id: -1 }).limit(1)
+
+    try {
+        res.status(200).json({
+            eventDetails
+        })
+    } catch (err) {
+        res.status(500).json({
+            status: 'Failed',
+            message: err
+        })
+    }
+})
 
 app.get('/train', (req, res) => {
     // var data1;
